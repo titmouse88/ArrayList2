@@ -24,23 +24,15 @@ namespace ArrayList
             _root = new Node(value);
             _tail = _root;
         }
-        //public LinkedList(int[] arr)
-        //{
-        //    if (arr == null)
-        //        return;
-        //    for (int i = 0; i < arr.Length; i++)
-        //    {
-        //        AddLast(arr[i]);
-        //    }
-        //}
+       
         public LinkedList(int[] values)
         {
-            Lenght = values.Length;
+            //Lenght = values.Length;
             if (values.Length != 0)
             {
                 _root = new Node(values[0]);
                 _tail = _root;
-                for (int i = 0; i < values.Length; i++)
+                for (int i = 1; i < values.Length; i++)
                 {
                     _tail.Next = new Node(values[i]);
                     _tail = _tail.Next;
@@ -56,21 +48,22 @@ namespace ArrayList
 
         public int GetLength() //узнать кол-во элементов в списке
         {
-            int lenght = 0;
+            int length = 0;
             if (_root == null && _tail == null)
             {
-                return lenght;
+                return length;
             }
             else
             {
                 Node current = _root;
+                length = 1;
                 while (current.Next != null)
                 {
                     current = current.Next;
-                    lenght += 1;
+                    length++;
                 }
             }
-            return lenght;
+            return length;
         }
 
         public int[] ToArray() //вернёт хранимые данные в виде массива
@@ -109,11 +102,19 @@ namespace ArrayList
             list._tail.Next = _root;
             _root = list._root;
         }
-        public void AddLast(int value) //добавление в конец списка
+        public void AddLast(int val) //добавление в конец списка
         {
 
-            _tail.Next = new Node(value);
-            _tail = _tail.Next;
+            if (_root == null && _tail == null)
+            {
+                _root = new Node(val);
+                _tail = _root;
+            }
+            else
+            {
+                _tail.Next = new Node(val);
+                _tail = _tail.Next;
+            }
 
         }
 
@@ -176,7 +177,7 @@ namespace ArrayList
             {
                 AddFirst(val);
             }
-            for (int i = 0; i <= idx; i++)//can be zero
+            for (int i = 1; i <= idx; i++)
             {
                 current = current.Next;
             }
@@ -197,7 +198,7 @@ namespace ArrayList
                 return;
             }
 
-            _tail = _root.Next;
+            _root = _root.Next;
 
         }
 
@@ -221,48 +222,23 @@ namespace ArrayList
             _tail = current;
             current.Next = null;
         }
-        //public int RemoveFirst(int val)
-        //{
-        //    int index = -1;
-        //    Node current = _root;
-        //    if (_root.Value == val)
-        //    {
-        //        RemoveFirst();
-        //        return index = 0;
-        //    }
-        //    else
-        //    {
-        //        int tmp = 0;
-        //        while (current.Next != null)
-        //        {
-        //            current = current.Next;
-        //            tmp += 1;
-        //            if (current.Value == val)
-        //            {
-        //                if (current == _tail)
-        //                {
-        //                    RemoveLast();
-        //                    index = tmp;
-        //                    return index;
-        //                }
-        //                RemoveAt(tmp);
-        //                index = tmp;
-        //                return index;
-        //            }
-        //        }
-        //        return index;
-        //}
+        
 
         public void RemoveAt(int idx) // удаление по индексу
         {
             int length = GetLength();
-            if (idx > length)
+            if (idx >= length)
             {
                 throw new IndexOutOfRangeException("Попробуйте другое число");
             }
             if (idx == 0)
             {
                 RemoveFirst();
+                return;
+            }
+            if (idx == length - 1)
+            {
+                RemoveLast();
                 return;
             }
             Node current = _root;
@@ -276,44 +252,115 @@ namespace ArrayList
 
         public void RemoveFirstMultiple(int n) //- удаление первых n элементов
         {
+            int length = GetLength();
+            if (n > length || _root == null)
+            {
+                throw new Exception();
+            }
+            if (n == length)
+            {
+                _root = null;
+                _tail = null;
+                return;
+            }
+            Node current = _root;
 
+            for (int i = 1; i < n; i++)
+            {
+                current = current.Next;
+            }
+            _root = current.Next;
         }
 
         public void RemoveLastMultiple(int n) //- удаление последних n элементов
         {
-
+            int length = GetLength();
+            if (n > length || _root == null)
+            {
+                throw new Exception();
+            }
+            if (n == length)
+            {
+                _root = null;
+                _tail = null;
+                return;
+            }
+            Node current = _root;
+            for (int i = 1; i < length - n; i++)
+            {
+                current = current.Next;
+            }
+            _tail = current;
+            current.Next = null;
         }
-        public void RemoveAtMultiple(int idx, int n) //- удаление n элементов, начиная с указанного индекса
+         //- удаление n элементов, начиная с указанного индекса
+        public void RemoveAtMultiple(int idx, int n)
         {
-
+            int length = GetLength();
+            if (idx + n > length || _root == null)
+            {
+                throw new Exception();
+            }
+            if (length - n == idx)
+            {
+                RemoveLastMultiple(n);
+                return;
+            }
+            if (idx == 0)
+            {
+                RemoveFirstMultiple(n);
+                return;
+            }
+            Node current = _root;
+            for (int i = 1; i < idx; i++)
+            {
+                current = current.Next;
+            }
+            for (int i = 1; i <= n; i++)
+            {
+                current.Next = current.Next.Next;
+            }
         }
 
         public void RemoveFirst(int val) //- удалить первый попавшийся элемент, значение которого равно val(вернуть индекс удалённого элемента)
         {
-
+            _root = _root.Next;
         }
 
         public int RemoveAll(int val) //удалить все элементы, равные val (вернуть кол-во удалённых элементов)
         {
+            if (_root == null)
+            {
+                throw new Exception();
+            }
             int sum = 0;
             Node current = _root;
-            while (current.Next != null)
+            Node tmp = new Node(0);
+            tmp.Next = current;
+
+            while (current != null)
             {
                 if (current.Value == val)
                 {
-                    sum += 1;
+                    if (current == _root)
+                    {
+                        RemoveFirst();
+                        sum += 1;
+                    }
+                    else if (current == _tail)
+                    {
+                        RemoveLast();
+                        sum += 1;
+                    }
+                    else
+                    {
+                        tmp.Next = current.Next;
+                        sum += 1;
+                    }
                 }
+                tmp = current;
                 current = current.Next;
             }
-            while (current.Next != null)
-            {
-                if (current.Value == val)
-                {
-
-                }
-                current = current.Next;
-            }
-
             return sum;
         }
         public bool Contains(int val) //- проверка, есть ли элемент в списке
@@ -331,11 +378,22 @@ namespace ArrayList
 
         }
 
-        //public int IndexOf(int val) //- вернёт индекс первого найденного элемента, равного val(или -1,
+        public int IndexOf(int val) //- вернёт индекс первого найденного элемента, равного val(или -1,
         //                            //если элементов с таким значением в списке нет)
-        //{
-
-        //}
+        {
+            int counter = 0;
+            Node current = _root;
+            while (current.Next != null)
+            {
+                if (current.Value == val)
+                    return counter;
+                if (current.Next == null)
+                    return -1;
+                current = current.Next;
+                counter++;
+            }
+            return counter;
+        }
         public int GetFirst() //вернёт значение первого элемента списка
         {
             Node current = _root;

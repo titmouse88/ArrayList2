@@ -86,6 +86,8 @@ namespace MySpace
             }
 
             [TestCase(new int[] { 1, 2, 5, 3, 9 }, new int[] { 1, 2, 3, 9 }, 2, 5)]
+            [TestCase(new int[] { 1, 5, 2, 3, 9 }, new int[] { 1, 2, 3, 9 }, 1, 5)]
+            [TestCase(new int[] { 1, 2, 3, 9, 5 }, new int[] { 1, 2, 3, 9 }, 4, 5)]
             public void AddAtTest(int[] array, int[] array2, int index, int value)
             {
                 //arrange
@@ -107,6 +109,8 @@ namespace MySpace
                 Assert.Throws(typeof(System.IndexOutOfRangeException), () => temp.AddAt(index, value));
             }
             [TestCase(new int[] { 1, 2, 7, 8, 9, 3, 9 }, new int[] { 1, 2, 3, 9 }, new int[] { 7, 8, 9 }, 2)]
+            [TestCase(new int[] { 1, 7, 8, 9, 2, 3, 9 }, new int[] { 1, 2, 3, 9 }, new int[] { 7, 8, 9 }, 1)]
+            [TestCase(new int[] { 1, 2, 7, 7, 9}, new int[] { 1, 2, 7, 9 }, new int[] { 7}, 3)]
             public void AddAtTest2(int[] array, int[] array2, int[] array3, int index)
             {
                 //arrange
@@ -121,6 +125,7 @@ namespace MySpace
                 Assert.AreEqual(exception, actual);
             }
             [TestCase(new int[] { 1, 2, 3, 9 }, new int[] { 11, 20, 3 }, 5)]
+           
             public void AddAtNegativeTest2(int[] array, int[] array2, int index)
             {
                 //arrange
@@ -131,7 +136,10 @@ namespace MySpace
             }
 
 
-            [TestCase(new int[] { 1, 77, 3, 9 }, new int[] { 1, 2, 3, 9 }, 1, 77)]
+            [TestCase(new int[] { 1, 77, 3, 9 }, new int[] { 1, 2, 3, 9 }, 1, 77)] //поменять значение элемента с указанным индексом
+            [TestCase(new int[] { 1, 2, 3, 77 }, new int[] { 1, 2, 3, 9 }, 3, 77)]
+            [TestCase(new int[] { 4, 1}, new int[] { 4, 3}, 1, 1)]
+
             public void SetTest(int[] array, int[] array2, int index, int value)
             {
                 //arrange
@@ -257,30 +265,20 @@ namespace MySpace
                 //assert
                 Assert.AreEqual(exception, actual);
             }
-            [TestCase(new int[] { 1, 77, 3, 9 }, 5, 2)]
-            [TestCase(new int[] { 1, 77, 3, 9 }, 1, 4)]
-            public void RemoveAtMultipleNegativeTest(int[] array, int index, int n)
+            [TestCase(new int[] { 1, 77, 3, 9 }, 11)]
+            [TestCase(new int[] { 1, 77, 3, 9 }, 4)]
+            [TestCase(new int[] { }, 0)]
+            public void RemoveAtNegativeTest2(int[] array, int index)
             {
                 //arrange
                 LinkedList temp = new LinkedList(array);
                 //act, assert
-                Assert.Throws(typeof(System.IndexOutOfRangeException), () => temp.RemoveAtMultiple(index, n));
+                Assert.Throws(typeof(System.IndexOutOfRangeException), () => temp.RemoveAt(index));
             }
-            //[TestCase(new int[] { 9, 1, 2, 3, 8, 9 }, 3, 3)]
-            //[TestCase(new int[] { 9, 1, 2, 3, 8, 9 }, 5, -1)]
-            //public void RemoveFirstTest2(int[] array, int val, int exception)
-            //{
-            //    //arrange
 
-            //    LinkedList temp = new LinkedList(array);
-            //    //act                      
-            //    int actual = temp.RemoveFirst(val);
-            //    //assert
-            //    Assert.AreEqual(exception, actual);
-            //}
             [TestCase(new int[] { 9, 1, 2, 3, 8, 9 }, 9, 2)]
             [TestCase(new int[] { 9, 1, 2, 3, 8, 9 }, 5, 0)]
-            [TestCase(new int[] { 4, 4 }, 4, 1)]
+            [TestCase(new int[] { 4, 4 }, 4, 2)]
             public void RemoveAllTest(int[] array, int val, int exception)
             {
                 //arrange

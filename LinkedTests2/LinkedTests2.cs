@@ -26,7 +26,7 @@ namespace LinkedTests2
             //assert
             Assert.AreEqual(exception, actual);
         }
-        [TestCase(new int[] { 9, 9, 2, 3 }, new int[] { 1, 2, 3 }, 9)]
+        [TestCase(new int[] { 9, 1, 2, 3 }, new int[] { 1, 2, 3 }, 9)]
         [TestCase(new int[] { 0 }, new int[] { }, 0)]
         public void AddFirstTest(int[] array, int[] array2, int value)
         {
@@ -40,5 +40,5 @@ namespace LinkedTests2
             //assert
             Assert.AreEqual(exception, actual);
         }
-       }
+    }
 }
