@@ -405,9 +405,143 @@ namespace ArrayList
             return current.Value;
         }
 
+        public int Get(int idx)// - вернёт значение элемента списка c указанным индексом
+        {
+            Node current = _root;
+            int counter = 0;
+            while (current.Next != null)
+            {
+                if (counter == idx)
+                    break;
+                if (current.Next == null)
+                    throw new IndexOutOfRangeException("индекс больше количества элементов");
+                counter++;
+                current = current.Next;
+            }
+            return current.Value;
+        }
+
+        //Reverse() - изменение порядка элементов списка на обратный
+        public void Reverse()
+        {
+            Node previous = null;
+            Node current = _root;
+            Node temp;
+            while (current != null)
+            {
+                temp = current.Next;
+                current.Next = previous;
+                previous = current;
+                current = temp;
+            }
+            _root = previous;
+        }
+
+        //Max() - поиск значения максимального элемента
+        public int Max()
+        {
+            if (_root == null)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            if (_root.Next == null)
+            {
+                return _root.Value;
+            }
+            
+            int max = _root.Value;
+            Node current = _root;
+            while (current.Next != null)
+            {
+                if (max < current.Value)
+                    max = current.Value;
+                current = current.Next;
+            }
+            return max;
+        }
+        public int Min()
+        {
+
+            if (_root == null)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            if (_root.Next == null)
+            {
+                return _root.Value;
+            }
+            int min = _root.Value;
+            Node current = _root;
+            while (current.Next != null)
+            {
+                if (min > current.Value)
+                    min = current.Value;
+                current = current.Next;
+            }
+            return min;
+        }
+
+        //IndexOfMax() - поиск индекс максимального элемента
+        public int IndexOfMax()
+        {
+            if (_root == null)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            if (_root.Next == null)
+            {
+                return 0;
+            }
+            if (_root == null)
+                return -1;
+            int max = _root.Value;
+            int counter = 0;
+            int idxOfMax = 0;
+            Node current = _root;
+            while (current.Next != null)
+            {
+                if (max < current.Value)
+                {
+                    max = current.Value;
+                    idxOfMax = counter;
+                }
+                counter++;
+                current = current.Next;
+            }
+            return idxOfMax;
+        }
+        //IndexOfMin() - поиск индекс минимального элемента
+        public int IndexOfMin()
+        {
+            if (_root == null)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            if (_root.Next == null)
+            {
+                return 0;
+            }
+            if (_root == null)
+                return -1;
+            int min = _root.Value;
+            int counter = 0;
+            int idxOfMin = 0;
+            Node current = _root;
+            while (current.Next != null)
+            {
+                if (min > current.Value)
+                {
+                    min = current.Value;
+                    idxOfMin = counter;
+                }
+                counter++;
+                current = current.Next;
+            }
+            return idxOfMin;
+        }
         //Sort() - сортировка по возрастанию
 
-       
+
         public void Sort()
         {
             if (_root == null)

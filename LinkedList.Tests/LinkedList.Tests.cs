@@ -301,18 +301,7 @@ namespace MySpace
                 //assert
                 Assert.AreEqual(exception, actual);
             }
-            //[TestCase(new int[] { 9, 1, 2, 3, 8, 9 }, 9, 0)]
-            //[TestCase(new int[] { 9, 1, 2, 3, 8, 9 }, 5, -1)]
-            //public void IndexOfTest(int[] array, int val, int exception)
-            //{
-            //    //arrange
-
-            //    LinkedList temp = new LinkedList(array);
-            //    //act                      
-            //    int actual = temp.IndexOf(val);
-            //    //assert
-            //    Assert.AreEqual(exception, actual);
-            //}
+           
             [TestCase(new int[] { 0, 4, 1, 2, 3 }, 0)]
             [TestCase(new int[] { 9, 1, 2, 3, 8, 9 }, 9)]
             public void GetFirstTest(int[] array, int exception)
@@ -324,77 +313,111 @@ namespace MySpace
                 //assert
                 Assert.AreEqual(exception, actual);
             }
-            //[TestCase(new int[] { 0, 4, 1, 2, 3 }, 3)]
-            //[TestCase(new int[] { 9, 1, 2, 3, 8, 9 }, 9)]
-            //public void GetLastTest(int[] array, int exception)
-            //{
-            //    arrange
-            //    LinkedList temp = new LinkedList(array);
-            //    act
-            //    int actual = temp.GetLast();
-            //    assert
-            //    Assert.AreEqual(exception, actual);
-            //}
-            //[TestCase(new int[] { 9, 8, 3, 2, 1, 9 }, new int[] { 9, 1, 2, 3, 8, 9 })]
-            //public void ReverseTest(int[] array, int[] array2)
-            //{
-            //    //arrange
-            //    ArrayList temp = new ArrayList(array);
-            //    ArrayList temp2 = new ArrayList(array2);
-            //    //act
-            //    temp2.Reverse();
-            //    int[] exception = temp.ToArray();
-            //    int[] actual = temp2.ToArray();
-            //    //assert
-            //    Assert.AreEqual(exception, actual);
-            //}
-            //[TestCase(new int[] { 0, 4, 1, 2, 3 }, 4)]
-            //[TestCase(new int[] { 9, 1, 2, 3, 8, 9, 11 }, 11)]
-            //public void MaxTest(int[] array, int exception)
-            //{
-            //    //arrange           
-            //    ArrayList temp = new ArrayList(array);
-            //    //act            
-            //    int actual = temp.Max();
-            //    //assert
-            //    Assert.AreEqual(exception, actual);
-            //}
-            //[TestCase(new int[] { 0, 4, 1, 2, 3 }, 0)]
-            //[TestCase(new int[] { 9, 1, 2, 3, 8, 9, 11 }, 1)]
-            //public void MinTest(int[] array, int exception)
-            //{
-            //    //arrange           
-            //    ArrayList temp = new ArrayList(array);
-            //    //act            
-            //    int actual = temp.Min();
-            //    //assert
-            //    Assert.AreEqual(exception, actual);
-            //}
-            //[TestCase(new int[] { 0, 4, 1, 2, 3 }, 1)]
-            //[TestCase(new int[] { 9, 1, 2, 3, 8, 9, 11 }, 6)]
-            //public void IndexOfMaxTest(int[] array, int exception)
-            //{
-            //    //arrange           
-            //    LinkedList temp = new LinkedList(array);
-            //    //act            
-            //    int actual = temp.IndexOfMax();
-            //    //assert
-            //    Assert.AreEqual(exception, actual);
-            //}
-            //[TestCase(new int[] { 0, 4, 1, 2, 3 }, 0)]
-            //[TestCase(new int[] { 9, 1, -5, 2, 3, 8, 9, 11 }, 2)]
-            //public void IndexOfMinTest(int[] array, int exception)
-            //{
-            //    //arrange           
-            //    LinkedList temp = new LinkedList(array);
-            //    //act            
-            //    int actual = temp.IndexOfMin();
-            //    //assert
-            //    Assert.AreEqual(exception, actual);
-            //}
 
-
-
+            [TestCase(new int[] { 0, 4, 1, 2, 3 }, 3, 2)]
+            [TestCase(new int[] { 9, 1, 2, 3, 8, 9 }, 5, 9)]
+            [TestCase(new int[] { 7, 1, 2, 3, 8, 9 }, 0, 7)]
+            public void GetTest(int[] array, int index, int exception)
+            {
+                //arrange           
+                LinkedList temp = new LinkedList(array);
+                //act            
+                int actual = temp.Get(index);
+                //assert
+                Assert.AreEqual(exception, actual);
+            }
+           
+            [TestCase(new int[] { 9, 8, 3, 2, 1, 9 }, new int[] { 9, 1, 2, 3, 8, 9 })]
+            public void ReverseTest(int[] array, int[] array2)
+            {
+                //arrange
+                LinkedList temp = new LinkedList(array);
+                LinkedList temp2 = new LinkedList(array2);
+                //act
+                temp2.Reverse();
+                int[] exception = temp.ToArray();
+                int[] actual = temp2.ToArray();
+                //assert
+                Assert.AreEqual(exception, actual);
+            }
+            [TestCase(new int[] { 0, 4, 1, 2, 3 }, 4)]
+            [TestCase(new int[] { 9 }, 9)]
+            public void MaxTest(int[] array, int exception)
+            {
+                //arrange           
+                LinkedList temp = new LinkedList(array);
+                //act            
+                int actual = temp.Max();
+                //assert
+                Assert.AreEqual(exception, actual);
+            }
+            [TestCase(new int[] { }, 11)]
+            public void MaxNegativeTest(int[] array, int index)
+            {
+                //arrange
+                LinkedList temp = new LinkedList(array);
+                //act, assert
+                Assert.Throws(typeof(System.IndexOutOfRangeException), () => temp.Max());
+            }
+            [TestCase(new int[] { 0, 4, 1, 2, 3 }, 0)]
+            [TestCase(new int[] { 9, 1, 2, 3, 8, 9, 11 }, 1)]
+            [TestCase(new int[] { 9 }, 9)]
+            public void MinTest(int[] array, int exception)
+            {
+                //arrange           
+                LinkedList temp = new LinkedList(array);
+                //act            
+                int actual = temp.Min();
+                //assert
+                Assert.AreEqual(exception, actual);
+            }
+            [TestCase(new int[] { }, 11)]
+            public void MinNegativeTest(int[] array, int index)
+            {
+                //arrange
+                LinkedList temp = new LinkedList(array);
+                //act, assert
+                Assert.Throws(typeof(System.IndexOutOfRangeException), () => temp.Min());
+            }
+            [TestCase(new int[] { 0, 4, 1, 2, 3 }, 1)]
+            [TestCase(new int[] { 9 }, 0)]
+            public void IndexOfMaxTest(int[] array, int exception)
+            {
+                //arrange           
+                LinkedList temp = new LinkedList(array);
+                //act            
+                int actual = temp.IndexOfMax();
+                //assert
+                Assert.AreEqual(exception, actual);
+            }
+            [TestCase(new int[] { }, 11)]
+            public void IndexOfMaxNegativeTest(int[] array, int index)
+            {
+                //arrange
+                LinkedList temp = new LinkedList(array);
+                //act, assert
+                Assert.Throws(typeof(System.IndexOutOfRangeException), () => temp.IndexOfMax());
+            }
+            [TestCase(new int[] { 0, 4, 1, 2, 3 }, 0)]
+            [TestCase(new int[] { 9, 1, -5, 2, 3, 8, 9, 11 }, 2)]
+            [TestCase(new int[] { 9 }, 0)]
+            public void IndexOfMinTest(int[] array, int exception)
+            {
+                //arrange           
+                LinkedList temp = new LinkedList(array);
+                //act            
+                int actual = temp.IndexOfMin();
+                //assert
+                Assert.AreEqual(exception, actual);
+            }
+            [TestCase(new int[] { }, 11)]
+            public void IndexOfMinNegativeTest(int[] array, int index)
+            {
+                //arrange
+                LinkedList temp = new LinkedList(array);
+                //act, assert
+                Assert.Throws(typeof(System.IndexOutOfRangeException), () => temp.IndexOfMin());
+            }
             [TestCase(new int[] { 5, 4, 3, 2, 1 }, new int[] { 1, 2, 3, 4, 5 })]
             [TestCase(new int[] { 11, 8, 3, 5 }, new int[] { 3, 5, 8, 11 })]
             [TestCase(new int[] { }, new int[] { })]
