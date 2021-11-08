@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArrayList", "ArrayList.cspr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArrayList.Tests", "..\ArrayList.Tests\ArrayList.Tests.csproj", "{5035CB42-6493-4600-998B-A6018F56AFCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList.Tests", "..\LinkedList.Tests\LinkedList.Tests.csproj", "{73BC5AC9-5CC3-4F42-B47B-3F176D6965FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkedList.Tests", "..\LinkedList.Tests\LinkedList.Tests.csproj", "{73BC5AC9-5CC3-4F42-B47B-3F176D6965FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedTests2", "..\LinkedTests2\LinkedTests2.csproj", "{E13A3201-EF27-4202-BB6B-2BE2E333C722}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkedTests2", "..\LinkedTests2\LinkedTests2.csproj", "{E13A3201-EF27-4202-BB6B-2BE2E333C722}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleLinkedList.Tests", "..\DoubleLinkedList.Tests\DoubleLinkedList.Tests.csproj", "{F0FEDAA7-BA1B-4915-9160-509BDD25F8DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E13A3201-EF27-4202-BB6B-2BE2E333C722}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E13A3201-EF27-4202-BB6B-2BE2E333C722}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E13A3201-EF27-4202-BB6B-2BE2E333C722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0FEDAA7-BA1B-4915-9160-509BDD25F8DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0FEDAA7-BA1B-4915-9160-509BDD25F8DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0FEDAA7-BA1B-4915-9160-509BDD25F8DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0FEDAA7-BA1B-4915-9160-509BDD25F8DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
