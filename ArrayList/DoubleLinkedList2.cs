@@ -31,7 +31,7 @@ namespace ArrayList
                 _root = new DoubleLinkedNode(value[0]);
                 DoubleLinkedNode current;
                 _tail = _root;
-                for (int i = 0; i < value.Length; i++)
+                for (int i = 1; i < value.Length; i++)
                 {
                     _tail.Next = new DoubleLinkedNode(value[i]);
                     current = _tail;
@@ -60,14 +60,9 @@ namespace ArrayList
                     current = current.Next;
                 }
             }
-            if (lenght == 1 || lenght == 0)
-            {
-                return lenght;
-            }
-            else
-            {
-                return lenght - 1;
-            }
+
+            return lenght;
+
         }
 
         public int[] ToArray() //вернёт хранимые данные в виде массива
@@ -424,9 +419,13 @@ namespace ArrayList
         public int IndexOf(int val) //- вернёт индекс первого найденного элемента, равного val(или -1,
         //                            //если элементов с таким значением в списке нет)
         {
+            if (_root == null)
+            {
+                return -1;
+            }
             int counter = 0;
             DoubleLinkedNode current = _root;
-            while (current.Next != null)
+            while (current != null)
             {
                 if (current.Value == val)
                     return counter;
@@ -445,15 +444,19 @@ namespace ArrayList
 
         public int GetLast() //- вернёт значение последнего элемента списка
         {
-            DoubleLinkedNode current = _root;
+            DoubleLinkedNode current = _tail;
             return current.Value;
         }
 
         public int Get(int idx)// - вернёт значение элемента списка c указанным индексом
         {
+            if (idx < 0 || _root==null)
+            {
+                throw new IndexOutOfRangeException();
+            }
             DoubleLinkedNode current = _root;
             int counter = 0;
-            while (current.Next != null)
+            while (current != null)
             {
                 if (counter == idx)
                     break;
@@ -479,7 +482,7 @@ namespace ArrayList
             }
 
             DoubleLinkedNode tmp = _root;
-             _root = _tail;
+            _root = _tail;
             _tail = tmp;
 
         }
@@ -498,7 +501,7 @@ namespace ArrayList
 
             int max = _root.Value;
             DoubleLinkedNode current = _root;
-            while (current.Next != null)
+            while (current != null)
             {
                 if (max < current.Value)
                     max = current.Value;
@@ -539,13 +542,12 @@ namespace ArrayList
             {
                 return 0;
             }
-            if (_root == null)
-                return -1;
+
             int max = _root.Value;
             int counter = 0;
             int idxOfMax = 0;
             DoubleLinkedNode current = _root;
-            while (current.Next != null)
+            while (current != null)
             {
                 if (max < current.Value)
                 {
