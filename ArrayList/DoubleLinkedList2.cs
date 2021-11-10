@@ -589,13 +589,221 @@ namespace ArrayList
             return idxOfMin;
         }
 
+        //Sort() - сортировка по возрастанию
+
+
+        public void Sort()
+        {
+            if (_root == null)
+                return;
+            DoubleLinkedNode tempPrev, prev, tempCurrent, current, temp;
+
+            tempPrev = prev = _root;
+            while (prev.Next != null)
+            {
+                tempCurrent = current = prev.Next;
+                while (current != null)
+                {
+                    if (prev.Value > current.Value)
+                    {
+                        if (prev.Next == current)
+                        {
+                            if (prev == _root)
+                            {
+                                prev.Next = current.Next;
+                                current.Next = prev;
+                                //swap:
+                                temp = prev;
+                                prev = current;
+                                current = temp;
+
+                                tempCurrent = current;
+
+                                _root = prev;
+
+                                current = current.Next;
+                            }
+
+                            else
+                            {
+                                prev.Next = current.Next;
+                                current.Next = prev;
+                                tempPrev.Next = current;
+                                // Swap
+                                temp = prev;
+                                prev = current;
+                                current = temp;
+
+                                tempCurrent = current;
+
+                                current = current.Next;
+                            }
+                        }
+                        else
+                        {
+                            if (prev == _root)
+                            {
+                                temp = prev.Next;
+                                prev.Next = current.Next;
+                                current.Next = temp;
+                                tempCurrent.Next = prev;
+
+                                temp = prev;
+                                prev = current;
+                                current = temp;
+
+                                tempCurrent = current;
+
+                                current = current.Next;
+
+                                _root = prev;
+                            }
+
+                            // prev != _head
+                            else
+                            {
+                                temp = prev.Next;
+                                prev.Next = current.Next;
+                                current.Next = temp;
+                                tempCurrent.Next = prev;
+                                tempPrev.Next = current;
+
+                                temp = prev;
+                                prev = current;
+                                current = temp;
+
+                                tempCurrent = current;
+
+                                current = current.Next;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        tempCurrent = current;
+                        current = current.Next;
+                    }
+                }
+                tempPrev = prev;
+                prev = prev.Next;
+            }
+            _tail = _root;
+            while (_tail.Next != null)
+                _tail = _tail.Next;
+        }
+
+        //SortDesc() - сортировка по убыванию
+        public void SortDesc()
+        {
+            if (_root == null)
+                return;
+            DoubleLinkedNode tempPrev, prev, tempCurrent, current, temp;
+
+            tempPrev = prev = _root;
+            while (prev.Next != null)
+            {
+                tempCurrent = current = prev.Next;
+                while (current != null)
+                {
+                    if (prev.Value < current.Value)
+                    {
+                        if (prev.Next == current)
+                        {
+                            if (prev == _root)
+                            {
+                                prev.Next = current.Next;
+                                current.Next = prev;
+                                //swap:
+                                temp = prev;
+                                prev = current;
+                                current = temp;
+
+                                tempCurrent = current;
+
+                                _root = prev;
+
+                                current = current.Next;
+                            }
+
+                            else
+                            {
+                                prev.Next = current.Next;
+                                current.Next = prev;
+                                tempPrev.Next = current;
+                                // Swap
+                                temp = prev;
+                                prev = current;
+                                current = temp;
+
+                                tempCurrent = current;
+
+                                current = current.Next;
+                            }
+                        }
+                        else
+                        {
+                            if (prev == _root)
+                            {
+                                temp = prev.Next;
+                                prev.Next = current.Next;
+                                current.Next = temp;
+                                tempCurrent.Next = prev;
+
+                                temp = prev;
+                                prev = current;
+                                current = temp;
+
+                                tempCurrent = current;
+
+                                current = current.Next;
+
+                                _root = prev;
+                            }
+
+                            // prev != _head
+                            else
+                            {
+                                temp = prev.Next;
+                                prev.Next = current.Next;
+                                current.Next = temp;
+                                tempCurrent.Next = prev;
+                                tempPrev.Next = current;
+
+                                temp = prev;
+                                prev = current;
+                                current = temp;
+
+                                tempCurrent = current;
+
+                                current = current.Next;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        tempCurrent = current;
+                        current = current.Next;
+                    }
+                }
+                tempPrev = prev;
+                prev = prev.Next;
+            }
+            _tail = _root;
+            while (_tail.Next != null)
+                _tail = _tail.Next;
+        }
+
     }
 
 
 
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+

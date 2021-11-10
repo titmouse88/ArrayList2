@@ -493,32 +493,37 @@ namespace DoubleLinkedList.Tests
               //  assert
                 Assert.AreEqual(exception, actual);
             }
-            //[TestCase(new int[] { 1, 2, 3, 8, 9, 9 }, new int[] { 9, 1, 2, 3, 8, 9 })]
-            //public void SortTest(int[] array, int[] array2)
-            //{
-            //    //arrange
-            //    DoubleLinkedList2 temp = new DoubleLinkedList2(array);
-            //    DoubleLinkedList2 temp2 = new DoubleLinkedList2(array2);
-            //    //act
-            //    temp2.Sort();
-            //    int[] exception = temp.ToArray();
-            //    int[] actual = temp2.ToArray();
-            //    //assert
-            //    Assert.AreEqual(exception, actual);
-            //}
-            //[TestCase(new int[] { 9, 9, 8, 3, 2, 1 }, new int[] { 9, 1, 2, 3, 8, 9 })]
-            //public void SortDescTest(int[] array, int[] array2)
-            //{
-            //    //arrange
-            //    DoubleLinkedList2 temp = new DoubleLinkedList2(array);
-            //    DoubleLinkedList2 temp2 = new DoubleLinkedList2(array2);
-            //    //act
-            //    temp2.SortDesc();
-            //    int[] exception = temp.ToArray();
-            //    int[] actual = temp2.ToArray();
-            //    //assert
-            //    Assert.AreEqual(exception, actual);
-            //}
+            [TestCase(new int[] { 5, 4, 3, 2, 1 }, new int[] { 1, 2, 3, 4, 5 })]
+            [TestCase(new int[] { 11, 8, 3, 5 }, new int[] { 3, 5, 8, 11 })]
+            [TestCase(new int[] { }, new int[] { })]
+            [TestCase(new int[] { 42 }, new int[] { 42 })]
+
+            public void SortTest(int[] arr, int[] expected)
+            {
+                LinkedList list = new LinkedList(arr);
+
+                list.Sort();
+                var actual = list.ToArray();
+
+                Assert.AreEqual(actual, expected);
+            }
+
+
+            [TestCase(new int[] { 1, 2, 3, 4, 5 }, new int[] { 5, 4, 3, 2, 1 })]
+            [TestCase(new int[] { 3, 5, 8, 11 }, new int[] { 11, 8, 5, 3 })]
+            [TestCase(new int[] { }, new int[] { })]
+            [TestCase(new int[] { 42 }, new int[] { 42 })]
+
+            public void SortDesc(int[] arr, int[] expected)
+            {
+                LinkedList list = new LinkedList(arr);
+
+                list.SortDesc();
+                var actual = list.ToArray();
+
+                Assert.AreEqual(actual, expected);
+            }
+
         }
     }
 }
