@@ -500,7 +500,7 @@ namespace DoubleLinkedList.Tests
 
             public void SortTest(int[] arr, int[] expected)
             {
-                LinkedList list = new LinkedList(arr);
+                DoubleLinkedList2 list = new DoubleLinkedList2(arr);
 
                 list.Sort();
                 var actual = list.ToArray();
@@ -516,7 +516,7 @@ namespace DoubleLinkedList.Tests
 
             public void SortDesc(int[] arr, int[] expected)
             {
-                LinkedList list = new LinkedList(arr);
+                DoubleLinkedList2 list = new DoubleLinkedList2(arr);
 
                 list.SortDesc();
                 var actual = list.ToArray();
